@@ -1,0 +1,145 @@
+COMANDOS SQL
+
+
+
+\! clear 				--> Limpar tela no terminal mysql
+show databases				--->mostra os bancos de dados existentes 
+
+
+	DDL --> CREATE DATABASE
+		CREATE TABLE
+		ALTER TABLE
+		DROP TABLE
+
+CREATE DATABASE 'nome do banco';     	--> CRia um bando de dados
+USE 'NOME DO BANDO'
+
+CREATE TABLE 'nome da tabela' ;
+
+SHOW TABLES;
+
+
+DESCREIBE 'nome da tabela' =  			--> 'mostra oc campos da tabela'
+
+
+DROP database 'nome do banco';  		-->deleta o banco de dados
+
+
+CRIANDO UM BANDO DE DADOS EXEMPLO:
+
+CREATE DATABASE cadastro
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+
+CREATE TABLE  IF NOT EXISTS pessoa(
+	id int NOT NULL AUTO_INCREMENT,
+	nome varchar(30)NOT NULL, 
+	nascimento date NOT NULL, 
+	sexo enum('M', 'F') NOT NULL, 
+	peso decimal(5,2), 
+	altura decimal(3,2), 
+	nacionalidade varchar(20) DEFAULT 'Brasil', 
+	PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8;
+
+
+	#INSERINDO DADOS NA TABELA COM (INSERT INTO)
+
+INSERT INTO pessoa(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES('1', 'Eduardo', '1995-05-26', 'M', '63.5', '1.75' , 'Brasil');
+
+
+
+	#COMANDOS DE ALTERAÇÃO DE TABELAS
+
+
+ALTER TABLE pessoa
+
+ADD COLUMN 'nome do campo' 		--> Adciona um campo na tabela
+
+DROMP COLUMN 				--> Deleta uma coluna da tabela.
+
+
+ALTER TABLE pessoa
+ADD COLUMN profissao VARCHAR(20) AFTER nome;	--> Adciona o campo profissao depois do campo nome;
+
+
+ALTER TABLE pessoa
+ADD COLMUN profissao VARCHAR(30) FIRST;		--> Adciona a coluna como primeiro campo da tabela.
+
+ALTER TABLE pessoa
+MODIFY COLUMN profissao VARCHAR(30) NOT NULL;
+
+#modificar no nome da coluna da tabela;
+
+alter table pessoa
+change column profissao prof varchar(20);
+
+
+modificar o nome da tabela
+
+alter table pessoa
+raname to gafanhatos
+
+
+
+ALTER TABLE curso
+ADD COLUMN iD INT FIRST;	-->adciona um campo id na tabela
+ALTER TABLE curso
+ADD PRIMATY KEY (id)		-->Faz o id virar um chave primaria.
+
+
+	
+	INSERT INTO
+DML -->	UPDATE
+	DELETE
+	TRUNCATE
+
+
+
+	#ALTERAR OS REGISTROS DAS TABELAS
+
+UPDATE cursos
+SET nome = 'HTML5 e CSS3' WHERE id = '1';          --> Alterando registros da tabela
+ 
+
+UPDATE curso
+SET nome = 'blablabal', ano='000' where id = '3'; ->>  ALTERANDO DOIS VAORES AO MESMO TEMPO.
+
+
+
+	#Deletar os registro da tabela;
+
+
+DELETE FROM curso WHERE id = '1';
+
+delete from curso WHERE ano = '2050'		--> O limit limita a quantidade que ira ser apagado;
+limit 2;
+
+
+truncate curso;					--> Apaga todos os dados registrados na tabela.
+
+
+				GERAR SCRIPT DO BANCO
+
+
+mysqldump -u root -p nome_do_banco > nomedoarquivo.sql
+
+
+
+importar -- >>>> mysql -u usuario -p banco_de_dados < nomedoarquivo.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
