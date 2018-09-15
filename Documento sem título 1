@@ -78,7 +78,7 @@ change column profissao prof varchar(20);
 
 modificar o nome da tabela
 
-alter table pessoa
+alter table pessoa		--> muda o nome da tabela
 raname to gafanhatos
 
 
@@ -130,10 +130,57 @@ mysqldump -u root -p nome_do_banco > nomedoarquivo.sql
 importar -- >>>> mysql -u usuario -p banco_de_dados < nomedoarquivo.sql
 
 
+		# SELECT * FROM cursos;  
+
+select * from  --> Selecione todos os campos da tabela cursos
+
+
+select * from curso ORDER BY nome DESC; 	--> Ordena por onrdem alfabética de z - a
+
+
+select nome, carga, ano FROM cursos             --> Seleciona os campos desejados
+order by nome;
+
+
+
+select ano, nome, carga FROM cursos             --> Seleciona os campos desejados pela order de ano
+order by ano, nome;				--> Comerça com o ano e ira mostrar os nomes por orgerm alfabética.
+	
 
 
 
 
+select ano, carga, nome FROM curso 
+WHERE ano = 2016
+order by nome;
+
+
+
+
+
+SELECT ano, nome FROM  curso 			--> Mostra todos os dados cadastrados que  ano é menor que 2015
+WHERE ano <= 2015 
+ordar by nome;
+
+
+
+ou WHERE ano >= 2015		--> para mostrar os maiores
+
+ou WHERE ano != 2015		--> Lista todos diferentes
+
+
+
+SELECT nome, ano FROM  curso
+WHERE  ano BETWEEN 2014 AND 2016
+ordar by ano;
+
+SELECT nome, ano FROM  curso
+WHERE  ano IN (2014, 2016)
+ordar by ano;
+
+SELECT nome, caarga, totaula FROM curso
+WHERE carga > 35 AND totaula < 30
+order by nome;
 
 
 
