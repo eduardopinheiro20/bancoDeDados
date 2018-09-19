@@ -128,7 +128,7 @@ mysqldump -u root -p nome_do_banco > nomedoarquivo.sql
 
 
 importar -- >>>> mysql -u usuario -p banco_de_dados < nomedoarquivo.sql
-
+	
 
 		# SELECT * FROM cursos;  
 
@@ -183,10 +183,81 @@ WHERE carga > 35 AND totaula < 30
 order by nome;
 
 
+				CHAVE ESTRANGEIRA ---- RELACIONAMENTO DE TABELAS
+
+alter table pessoa
+add column id_curso int;		-->adcinando a chava estrangrira que ira ligar com a tabela curso
+
+
+alter table pessoa
+add foreign key (id_curso)	---> Tornando id_curso um chave estrangeira
+references curso (id);		---> Refenciando a chave estreganria a  chave primaria da tabela curso
+
+
+
+	MUL --> segnifica chava multipla que é a mesma coisa de uma chave estrageira
+
+
+update pessoa set id_curso = '6' where id = '1' 	-->Add um curso a uma pessoa, prmeiro o id do curdo e depois o id da pessoa que ira recebelo
 
 
 
 
+delete from curso where id = '6'; 	       --->Entei deletaar o curso de id 6, mas deu um erro pois ele esta cendo referenciado por uma outra tabela
+
+
+
+select pessoa.nome, curso.nome curso.ano     -->Mostrará as pessoas com os seus respectivos curdos.
+FROM pessoa INNER JOIN curso
+ON curso.id =  pessoa.id_curso
+ORDER BY pessoa.nome;
+
+
+or
+
+SELECT p.nome, c.nome, c.carga, c.ano 
+FROM pessoa AS p INNER JOIN curso AS c    ---> as é melhor pois diminui um pouco o código
+ON c.id = p.id_curso
+ORDER BU p.nome;
+
+
+
+SELECT p.nome, c.nome, c.carga, c.ano 
+FROM pessoa AS p LEFT OUTER JOIN curso AS c    ---> vAR DAR PREFERENCIA A COLUNA DA ESQUERDA(left join)
+ON c.id = p.id_curso
+ORDER BU p.nome;
+
+
+SELECT p.nome, c.nome, c.carga, c.ano 
+FROM pessoa AS p RIGHT OUTER JOIN curso AS c    ---> vAR DAR PREFERENCIA A COLUNA DA DIREITA (right join)
+ON c.id = p.id_curso
+ORDER BU p.nome;
+
+
+RELACIONAMENTO DE VARIAS TABELAS
+
+create table compra_curso(id int auto_increment, 
+data date,
+id_pessoa int, 
+id_curso int, 						--> tabela compra para ligar um com a outra;
+PRIMARY KEY(id),
+FOREIGN KEY (id_pessoa) references pessoa(id),
+FOREIGN KEY (id_c,urso) REFERENCES curso(id)
+);
+
+
+
+adcionado dados na compra 
+
+INSERT INTO compra_curso VALUES(DEFAULT, '2015-03-01', '1', '2');
+
+
+	MOSTRAR A TABELA DE COMPRA
+select * from pessoa p INNER JOIN compra_curso cp  ON p.id = cp.id_pessoa;
+
+
+
+select p.id, p.nome, c.id, c.nome FROM pessoa p INNER JOIN compra_curso cp ON p.id = cp.id_pessoa INNER JOIN curso c ON c.id = cp.id_curso ORDER BY p.nome;
 
 
 
